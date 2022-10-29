@@ -4,7 +4,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def GetEmail(request):
-    return Response(request.user.email, status=status.HTTP_200_OK)
+    response = {
+        "valid": str(request.data['username']) == str(request.user),
+        "email": request.user.email
+    }
+    return Response(response, status=status.HTTP_200_OK)
