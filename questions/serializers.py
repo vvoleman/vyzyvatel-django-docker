@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Category, Question
+from .models import Category, PickQuestion, NumericQuestion
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -9,7 +9,14 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ("id", "name")
 
 
-class QuestionSerializer(serializers.ModelSerializer):
+class PickQuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Question
-        fields = ("id", "get_category", "get_type", "question", "answers")
+        model = PickQuestion
+        fields = ("id", "question",
+                  "right_answer", "wrong_answers")
+
+
+class NumericQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NumericQuestion
+        fields = ("id", "question", "right_answer")
