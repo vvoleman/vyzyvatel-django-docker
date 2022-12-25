@@ -44,3 +44,25 @@ class NumericQuestion(models.Model):
 
     def get_category(self):
         return self.category.name
+
+
+class ImageQuestion(models.Model):
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE)
+
+    image_url = models.CharField(max_length=255, blank=False)
+
+    question = models.CharField(max_length=255, blank=False)
+    right_answer = models.CharField(max_length=64, blank=False)
+    wrong_answer_1 = models.CharField(max_length=64, blank=False)
+    wrong_answer_2 = models.CharField(max_length=64, blank=False)
+    wrong_answer_3 = models.CharField(max_length=64, blank=False)
+
+    def __str__(self):
+        return self.question
+
+    def get_category(self):
+        return self.category.name
+
+    def wrong_answers(self):
+        return [self.wrong_answer_1, self.wrong_answer_2, self.wrong_answer_3]

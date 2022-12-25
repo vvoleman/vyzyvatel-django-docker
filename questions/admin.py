@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Category)
 admin.site.register(PickQuestion)
 admin.site.register(NumericQuestion)
+admin.site.register(ImageQuestion)
