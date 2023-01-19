@@ -38,11 +38,11 @@ def DrawQuestions(request):
     random.shuffle(image_questions)
 
     pick_question_serialized = PickQuestionSerializer(
-        pick_questions[0:3], many=True)
+        pick_questions[0:10], many=True)
     numeric_question_serialized = NumericQuestionSerializer(
-        numeric_questions[0:3], many=True)
+        numeric_questions[0:10], many=True)
     image_question_serialized = ImageQuestionSerializer(
-        image_questions[0:3], many=True)
+        image_questions[0:10], many=True)
 
     return Response({"pickQuestions": pick_question_serialized.data,
                      "numericQuestions": numeric_question_serialized.data,
