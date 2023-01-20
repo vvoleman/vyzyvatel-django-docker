@@ -1,7 +1,6 @@
 from django.urls import path
-
-from .views import *
+from .views import Authentication
 
 urlpatterns = [
-    path('email/', GetEmail),
+    path('authentication/', Authentication),
 ]

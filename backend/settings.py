@@ -22,8 +22,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'storages',
-    'django_cleanup.apps.CleanupConfig',
     'djoser',
 ]
 

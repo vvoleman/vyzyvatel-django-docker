@@ -5,10 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['POST'])
-@permission_classes([permissions.AllowAny])
-def GetEmail(request):
+@permission_classes([permissions.IsAuthenticated])
+def Authentication(request):
     response = {
-        "valid": str(request.data['username']) == str(request.user),
+        "username": request.user.username,
         "email": request.user.email
     }
     return Response(response, status=status.HTTP_200_OK)
