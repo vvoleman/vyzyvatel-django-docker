@@ -14,7 +14,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
     'questions.apps.QuestionsConfig',
@@ -23,6 +22,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -112,3 +115,12 @@ CORS_ALLOW_METHODS = (
     'DELETE',
     'OPTIONS'
 )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'de5hglhix',
+    'API_KEY': '394517812138521',
+    'API_SECRET': 'LxXzWU-nQm0LAsGx5eAaZDwM2Mw'
+}
+
+MEDIA_URL = '/vyzyvatel-django/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

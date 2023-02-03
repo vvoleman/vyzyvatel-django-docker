@@ -33,16 +33,19 @@ def DrawQuestions(request):
         image_questions = image_questions + \
             list(category.imagequestion_set.all())
 
+        category.popularity += 1
+        category.save()
+
     random.shuffle(pick_questions)
     random.shuffle(numeric_questions)
     random.shuffle(image_questions)
 
     pick_question_serialized = PickQuestionSerializer(
-        pick_questions[0:10], many=True)
+        pick_questions[0:12], many=True)
     numeric_question_serialized = NumericQuestionSerializer(
-        numeric_questions[0:10], many=True)
+        numeric_questions[0:16], many=True)
     image_question_serialized = ImageQuestionSerializer(
-        image_questions[0:10], many=True)
+        image_questions[0:12], many=True)
 
     return Response({"pickQuestions": pick_question_serialized.data,
                      "numericQuestions": numeric_question_serialized.data,
