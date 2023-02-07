@@ -110,7 +110,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
@@ -122,7 +121,10 @@ CORS_ALLOW_METHODS = (
     'OPTIONS'
 )
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    'https://vyzyvatel-django-production.up.railway.app',
+]
+CSRF_TRUSTED_ORIGINS = ['https://vyzyvatel-django-production.up.railway.app']
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv("CLOUDINARY_NAME"),
