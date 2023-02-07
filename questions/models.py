@@ -91,10 +91,10 @@ class ImageQuestion(models.Model):
         if original_image is None or self.image != original_image:
             img = Image.open(self.image).convert("RGB")
 
-            img.thumbnail((1400, 400))
+            img.thumbnail((640, 520))
 
             img_io = io.BytesIO()
-            img.save(img_io, 'JPEG', quality=70)
+            img.save(img_io, 'JPEG', quality=50)
             img_io.seek(0)
 
             random_name = ''.join(random.choice(
