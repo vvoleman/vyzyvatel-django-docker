@@ -18,7 +18,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
     'questions.apps.QuestionsConfig',
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
     'djoser',
     'cloudinary_storage',
     'cloudinary',
+    'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
 ]
 
