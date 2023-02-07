@@ -1,8 +1,12 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-j(4aazef7a!d!q+a_i^lz!^f6vhu(gz4i6d3bpyidg3hiriy@$'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY"),
 
 DEBUG = True
 
@@ -62,8 +66,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
@@ -117,9 +125,9 @@ CORS_ALLOW_METHODS = (
 )
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'de5hglhix',
-    'API_KEY': '394517812138521',
-    'API_SECRET': 'LxXzWU-nQm0LAsGx5eAaZDwM2Mw'
+    'CLOUD_NAME': os.getenv("CLOUDINARY_NAME"),
+    'API_KEY': os.getenv("CLOUDINARY_API_KEY"),
+    'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
 }
 
 MEDIA_URL = '/vyzyvatel-django/'
