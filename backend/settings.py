@@ -123,7 +123,7 @@ CORS_ALLOW_METHODS = (
 )
 
 CORS_ALLOWED_ORIGINS = [
-    'https://vyzyvatel-django-production.up.railway.app',
+    'https://vyzyvatel-django-production.up.railway.app', 'https://vyzyvatel-frontend.vercel.app',
 ]
 CSRF_TRUSTED_ORIGINS = ['https://vyzyvatel-django-production.up.railway.app']
 
