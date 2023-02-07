@@ -19,34 +19,38 @@ def GetCategories(request):
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def DrawQuestions(request):
-    active_categories_id = request.data.get('categories')
+    try:
+        active_categories_id = request.data.get('categories')
 
-    categories = Category.objects.filter(pk__in=active_categories_id)
+        categories = Category.objects.filter(pk__in=active_categories_id)
 
-    pick_questions = []
-    numeric_questions = []
-    image_questions = []
-    for category in categories:
-        pick_questions = pick_questions + list(category.pickquestion_set.all())
-        numeric_questions = numeric_questions + \
-            list(category.numericquestion_set.all())
-        image_questions = image_questions + \
-            list(category.imagequestion_set.all())
+        pick_questions = []
+        numeric_questions = []
+        image_questions = []
+        for category in categories:
+            pick_questions = pick_questions + \
+                list(category.pickquestion_set.all())
+            numeric_questions = numeric_questions + \
+                list(category.numericquestion_set.all())
+            image_questions = image_questions + \
+                list(category.imagequestion_set.all())
 
-        category.popularity += 1
-        category.save()
+            category.popularity += 1
+            category.save()
 
-    random.shuffle(pick_questions)
-    random.shuffle(numeric_questions)
-    random.shuffle(image_questions)
+        random.shuffle(pick_questions)
+        random.shuffle(numeric_questions)
+        random.shuffle(image_questions)
 
-    pick_question_serialized = PickQuestionSerializer(
-        pick_questions[0:12], many=True)
-    numeric_question_serialized = NumericQuestionSerializer(
-        numeric_questions[0:16], many=True)
-    image_question_serialized = ImageQuestionSerializer(
-        image_questions[0:12], many=True)
+        pick_question_serialized = PickQuestionSerializer(
+            pick_questions[0:12], many=True)
+        numeric_question_serialized = NumericQuestionSerializer(
+            numeric_questions[0:16], many=True)
+        image_question_serialized = ImageQuestionSerializer(
+            image_questions[0:12], many=True)
 
-    return Response({"pickQuestions": pick_question_serialized.data,
-                     "numericQuestions": numeric_question_serialized.data,
-                     "imageQuestions": image_question_serialized.data}, status=status.HTTP_200_OK)
+        return Response({"pickQuestions": pick_question_serialized.data,
+                        "numericQuestions": numeric_question_serialized.data,
+                         "imageQuestions": image_question_serialized.data}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

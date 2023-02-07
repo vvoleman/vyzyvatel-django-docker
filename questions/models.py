@@ -2,6 +2,8 @@ from django.db import models
 from PIL import Image
 import io
 from django.core.files import File
+import random
+import string
 
 
 class Category(models.Model):
@@ -37,7 +39,7 @@ class PickQuestion(models.Model):
 
 class NumericQuestion(models.Model):
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, blank=True, null=True)
+        Category, on_delete=models.CASCADE)
 
     question = models.CharField(max_length=255, blank=False)
     right_answer = models.IntegerField(blank=False)
@@ -59,9 +61,10 @@ class ImageQuestion(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE)
 
-    image = models.ImageField(upload_to='image_question/', blank=True)
+    image = models.ImageField(upload_to='image_question/')
 
-    question = models.CharField(max_length=255, blank=False)
+    question = models.CharField(
+        max_length=255, blank=False, default='Co je na obrázku?')
     right_answer = models.CharField(max_length=64, blank=False)
     wrong_answer_1 = models.CharField(max_length=64, blank=False)
     wrong_answer_2 = models.CharField(max_length=64, blank=False)
@@ -80,14 +83,23 @@ class ImageQuestion(models.Model):
         return [self.wrong_answer_1, self.wrong_answer_2, self.wrong_answer_3]
 
     def save(self, *args, **kwargs):
-        img = Image.open(self.image).convert("RGB")
+        try:
+            original_image = ImageQuestion.objects.get(pk=self.pk).image
+        except ImageQuestion.DoesNotExist:
+            original_image = None
 
-        img.thumbnail((1400, 400))
+        if original_image is None or self.image != original_image:
+            img = Image.open(self.image).convert("RGB")
 
-        img_io = io.BytesIO()
-        img.save(img_io, 'JPEG', quality=70)
-        img_io.seek(0)
+            img.thumbnail((1400, 400))
 
-        self.image = File(img_io, name=self.image.name)
+            img_io = io.BytesIO()
+            img.save(img_io, 'JPEG', quality=70)
+            img_io.seek(0)
+
+            random_name = ''.join(random.choice(
+                string.ascii_letters + string.digits) for _ in range(16)) + ".jpeg"
+
+            self.image = File(img_io, name=random_name)
 
         super().save(*args, **kwargs)
