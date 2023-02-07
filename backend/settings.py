@@ -132,9 +132,8 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
 }
 
-MEDIA_URL = '/vyzyvatel-django/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = ('staticfiles',)
