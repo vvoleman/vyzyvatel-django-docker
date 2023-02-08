@@ -127,6 +127,7 @@ TRUSTED_ORIGINS = [
     'https://vyzyvatel.vercel.app',
     'https://vyzyva.tel',
     'https://www.vyzyva.tel',
+    'https://admin.vyzyva.tel',
 ]
 
 CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
