@@ -10,7 +10,8 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY"),
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://admin.vyzyva.tel',
+                 'https://vyzyvatel-django-production.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -127,6 +128,7 @@ TRUSTED_ORIGINS = [
     'https://vyzyva.tel',
     'https://www.vyzyva.tel',
     'https://vyzyvatel-socketio-production.up.railway.app',
+    'https://admin.vyzyva.tel'
 ]
 
 CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
