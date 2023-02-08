@@ -4,7 +4,7 @@ from .models import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id, name', 'popularity')
+    list_display = ('id', 'name', 'popularity')
 
 
 class PickQuestionAdmin(admin.ModelAdmin):
