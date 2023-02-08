@@ -122,11 +122,15 @@ CORS_ALLOW_METHODS = (
     'OPTIONS'
 )
 
-CORS_ALLOWED_ORIGINS = [
-    'https://vyzyvatel-django-production.up.railway.app', 'https://vyzyvatel.vercel.app',
+TRUSTED_ORIGINS = [
+    'https://vyzyvatel.vercel.app',
+    'https://vyzyva.tel',
+    'https://www.vyzyva.tel',
+    'https://vyzyvatel-socketio-production.up.railway.app',
 ]
-CSRF_TRUSTED_ORIGINS = [
-    'https://vyzyvatel-django-production.up.railway.app', 'https://vyzyvatel.vercel.app']
+
+CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = TRUSTED_ORIGINS
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv("CLOUDINARY_NAME"),
