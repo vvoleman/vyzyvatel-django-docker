@@ -12,17 +12,17 @@ class PickQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PickQuestion
         fields = ("id", "question",
-                  "right_answer", "wrong_answers")
+                  "right_answer", "wrong_answers", "get_category")
 
 
 class NumericQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = NumericQuestion
-        fields = ("id", "question", "right_answer")
+        fields = ("id", "question", "right_answer", "get_category")
 
 
 class ImageQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageQuestion
         fields = ("id", "image_url", "question",
-                  "right_answer", "wrong_answers")
+                  "right_answer", "wrong_answers", "get_category")
