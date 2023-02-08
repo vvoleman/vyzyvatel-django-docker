@@ -10,16 +10,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY"),
 
 DEBUG = False
 
-TRUSTED_ORIGINS = [
-    'https://vyzyvatel-django-production.up.railway.app'
-    'https://vyzyvatel-socketio-production.up.railway.app',
-    'https://vyzyvatel.vercel.app',
-    'https://vyzyva.tel',
-    'https://www.vyzyva.tel',
-    'https://admin.vyzyva.tel',
-]
-
-ALLOWED_HOSTS = TRUSTED_ORIGINS
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -130,6 +121,14 @@ CORS_ALLOW_METHODS = (
     'DELETE',
     'OPTIONS'
 )
+
+TRUSTED_ORIGINS = [
+    'https://vyzyvatel-socketio-production.up.railway.app',
+    'https://vyzyvatel.vercel.app',
+    'https://vyzyva.tel',
+    'https://www.vyzyva.tel',
+    'https://admin.vyzyva.tel',
+]
 
 CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = TRUSTED_ORIGINS
