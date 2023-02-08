@@ -124,10 +124,9 @@ CORS_ALLOW_METHODS = (
 )
 
 TRUSTED_ORIGINS = [
+    'https://vyzyvatel-socketio-production.up.railway.app',
     'https://vyzyvatel.vercel.app',
     'https://vyzyva.tel',
-    'https://www.vyzyva.tel',
-    'https://vyzyvatel-socketio-production.up.railway.app',
 ]
 
 CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
