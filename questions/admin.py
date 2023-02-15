@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PickQuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'right_answer',
+    list_display = ('id', 'question', 'right_answer',
                     'wrong_answers')
     list_filter = [
         "category",
@@ -16,14 +16,14 @@ class PickQuestionAdmin(admin.ModelAdmin):
 
 
 class NumericQuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'right_answer')
+    list_display = ('id', 'question', 'right_answer')
     list_filter = [
         "category",
     ]
 
 
 class ImageQuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'right_answer',
+    list_display = ('id', 'question', 'right_answer',
                     'wrong_answers', 'image_url')
     list_filter = [
         "category",

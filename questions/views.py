@@ -28,12 +28,9 @@ def DrawQuestions(request):
         numeric_questions = []
         image_questions = []
         for category in categories:
-            pick_questions = pick_questions + \
-                list(category.pickquestion_set.all())
-            numeric_questions = numeric_questions + \
-                list(category.numericquestion_set.all())
-            image_questions = image_questions + \
-                list(category.imagequestion_set.all())
+            pick_questions += list(category.pickquestion_set.all())
+            numeric_questions += list(category.numericquestion_set.all())
+            image_questions += list(category.imagequestion_set.all())
 
             category.popularity += 1
             category.save()
