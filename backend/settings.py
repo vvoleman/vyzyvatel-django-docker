@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY"),
 
-DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG") == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -68,11 +68,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("PGDATABASE"),
-        'USER': os.getenv("PGUSER"),
-        'PASSWORD': os.getenv("PGPASSWORD"),
-        'HOST': os.getenv("PGHOST"),
-        'PORT': os.getenv("PGPORT"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
@@ -122,27 +122,34 @@ CORS_ALLOW_METHODS = (
     'OPTIONS'
 )
 
-TRUSTED_ORIGINS = [
-    'https://vyzyvatel-socketio-production.up.railway.app',
-    'https://vyzyvatel.vercel.app',
-    'https://vyzyva.tel',
-    'https://www.vyzyva.tel',
-    'https://admin.vyzyva.tel',
-]
+formatted_trusted_origins = os.getenv("TRUSTED_ORIGINS").replace('[','').replace(']','').split(',')
+
+TRUSTED_ORIGINS = formatted_trusted_origins
 
 CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = TRUSTED_ORIGINS
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv("CLOUDINARY_NAME"),
-    'API_KEY': os.getenv("CLOUDINARY_API_KEY"),
-    'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.getenv("CLOUDINARY_NAME"),
+#     'API_KEY': os.getenv("CLOUDINARY_API_KEY"),
+#     'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
+# }
+#
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Add these settings for local file storage
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL that serves the uploaded files
+MEDIA_URL = 'media/'
+
+# Set the default file storage to FileSystemStorage
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles/admin'),
+    os.path.join(BASE_DIR, 'staticfiles/cloudinary'),
+    os.path.join(BASE_DIR, 'staticfiles/rest_framework'),
 ]
